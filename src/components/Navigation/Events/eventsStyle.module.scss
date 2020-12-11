@@ -1,0 +1,40 @@
+//    VARIABLES
+// ===========================
+
+$event-one: #993535;
+$event-two: #993535;
+$event-three: #349924;
+
+$text-dark: #000000;
+$text-bright: #efefef;
+
+.events {
+  padding: 0 0 1rem;
+
+  &_item {
+    display: flex;
+    //margin-bottom: 5px;
+    vertical-align: center;
+    border: 2px solid;
+
+    &_btn {
+      height: 40px;
+      width: 140px;
+      border: none;
+      border-right: 2px solid;
+
+      &One {
+        color: $text-bright;
+        background: $event-one;
+      }
+      &Two {
+        color: $text-bright;
+        background: $event-two;
+      }
+      &Three {
+        color: $text-bright;
+        background: $event-three;
+      }
+    }
+  }
+}
