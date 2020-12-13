@@ -1,5 +1,5 @@
 import React, {useState, useContext} from 'react';
-import _video from "../../data/groundSafetyTrainingVideo.mkv";
+import _video from "../../data/Ground Safety Training Video-8KWFPNAcndQ.mkv";
 import styles from './playerStyles.module.scss'
 import ProgressBar from "./ProgressBar/ProgressBar";
 import Context from "../context";
