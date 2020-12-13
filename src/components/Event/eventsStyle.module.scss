@@ -1,0 +1,81 @@
+@import "../../normalise.css";
+
+//Variables
+$text-dark: #000000;
+$text-bright: #efefef;
+$moreBtn-color: purple;
+$more-btn-radius: 30px;
+$line-height: 20px;
+
+//Mixin
+@mixin multiLineEllipsis($lineHeight: 1.2em, $lineCount: 1, $bgColor: white){
+  overflow: hidden;
+  position: relative;
+  line-height: $lineHeight;
+  max-height: $lineHeight * $lineCount;
+  text-align: justify;
+  margin-right: -1em;
+  padding-right: 1em;
+  &:before {
+    content: '...';
+    position: absolute;
+    right: 0;
+    bottom: 0;
+  }
+  &:after {
+    content: '';
+    position: absolute;
+    right: 0;
+    width: 1em;
+    height: 1em;
+    margin-top: 0.2em;
+    background: $bgColor;
+  }
+}
+
+//Styles
+.item {
+  display: flex;
+  margin: -5px 0 4px 0;
+  border: 3px solid;
+  padding: 0;
+  vertical-align: center;
+  justify-content: space-between;
+
+  &_wrapper {
+    display: flex;
+    line-height: $line-height;
+
+    &_description {
+      @include multiLineEllipsis($lineHeight: 1.2em, $lineCount: 2, $bgColor: white);
+
+      margin-left: 10px;
+      margin-right: 10px;
+      align-self: center;
+      max-width: 100%;
+
+      &Opened {
+        margin-left: 10px;
+        align-self: center;
+        overflow: scroll;
+        max-width: 50em;
+        max-height: 200px;
+      }
+    }
+  }
+  &_moreBtn {
+    margin: 0 10px 0 10px;
+    line-height: 50%;
+    border-radius: 50%;
+    align-self: center;
+
+    height: $more-btn-radius;
+    max-width: $more-btn-radius;
+    min-width: $more-btn-radius;
+
+    background: $moreBtn-color;
+    color: $text-bright;
+    font-size: ( $more-btn-radius/2 )pt;
+    font-weight: bold;
+  }
+}

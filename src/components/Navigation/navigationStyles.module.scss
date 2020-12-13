@@ -1,0 +1,21 @@
+@import "../../normalise.css";
+
+.navigation {
+  padding: 1rem;
+  height: 40px;
+  line-height: 40px;
+
+  &_phases {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    padding-bottom: 1rem;
+    justify-content: space-between;
+  }
+
+  &_events {
+    padding: 0 0 1rem;
+    display: flex;
+    flex-direction: column;
+  }
+}

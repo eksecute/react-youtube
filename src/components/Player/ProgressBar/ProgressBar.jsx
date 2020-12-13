@@ -1,77 +1,82 @@
-import React, { useContext } from 'react';
-import PropTypes from 'prop-types';
+import React, { useContext, useState, useRef } from 'react';
 import styles from "./progressBarStyles.module.scss";
 import Context from "../../context";
 
-const ProgressBar = props => {
-  const { progress, scrub, progressRef, phaseTimeStamps, eventTimeStamps } = useContext(Context);
-  // const context = useContext(Context);
+export default function ProgressBar () {
+  const {
+    video,
+    scrub,
+    progressRef,
+    phaseTimeStamps,
+    progress,
+    setProgress,
+    eventTimeStamps,
+    phaseColors
+  } = useContext(Context);
+
+  const [isMouseDown, setMouseDown] = useState(false);
+
+  const startMouseDown = (e) => {
+    setMouseDown(true);
+  };
+  const endMouseDown = (e) => {
+    setMouseDown(false);
+  };
 
   return (
     <div
-        className={styles.progress}
-        ref={progressRef}
-        onClick={scrub}
+        className={ styles.progress }
+        ref={ progressRef }
+        onClick={ scrub }
+        onMouseDown={startMouseDown}
+        onMouseUp={endMouseDown}
+        onMouseLeave={endMouseDown}
+        onMouseMove={(e) => isMouseDown ? scrub(e) : null}
     >
+        {/* phases tags */}
+        { phaseTimeStamps.map((el, idx) => {
+            const startPercent = (el.start / video.duration) * 100;
+            const endPercent = (el.end / video.duration) * 100;
+            let toAppendStyles = {
+              marginLeft: `${ startPercent }%`,
+              width: `${ endPercent - startPercent }%`,
+              background: phaseColors[idx],
+              opacity: .9,
+              zIndex: -2
+            };
 
-        <div className={styles.progress__phasesAndEvents}>
+            return <div className={ styles.progress__phaseEvent }
+                        style={ toAppendStyles }
+                        key={ idx }
+            />
+        })}
 
-          {/*      ========== Phases ===========        */}
-          {
-            phaseTimeStamps.forEach( (el, idx) => {
-              const toAppendStyles = {
-                left: `${el.start}px`,
-                width: `${el.end - el.start}px`,
-                // background: state.colors[idx]
-              };
+        {/* events tags */}
+        { eventTimeStamps.map((el, idx) => {
+            const startPercent = ( el.start / video.duration ) * 100;
+            let toAppendStyles = {
+              marginLeft: `${ startPercent }%`,
+              width: `3%`,
+              background: el.highlight,
+              opacity: 1,
+              zIndex: -1
+            };
 
-              return <div className={styles.playerControlsProgress__phsAndEvs}
-                          style={toAppendStyles}
-              />
-            })
-          }
+            return <div className={ styles.progress__phaseEvent }
+                        style={ toAppendStyles }
+                        key={idx}
+            />
+          })}
 
-
-
-          {/*<div className={styles.playerControlsProgress__phsAndEvs_phase1}*/}
-          {/*     style={{width: phaseTimeStamps.}}*/}
-          {/*/>*/}
-          {/*<div className={styles.playerControlsProgress__phsAndEvs_phase2}*/}
-          {/*     style={{width: phaseTimeStamps.}}*/}
-          {/*/>*/}
-          {/*<div className={styles.playerControlsProgress__phsAndEvs_phase3}*/}
-          {/*     style={{width: phaseTimeStamps.}}*/}
-          {/*/>*/}
-
-          {/*/!*      ========== Events ============        *!/*/}
-          {/*<div className={styles.playerControlsProgress__phsAndEvs_event1}*/}
-          {/*     style={{left: progress}}*/}
-          {/*/>*/}
-          {/*<div className={styles.playerControlsProgress__phsAndEvs_event2}*/}
-          {/*     style={{left: progress}}*/}
-          {/*/>*/}
-          {/*<div className={styles.playerControlsProgress__phsAndEvs_event3}*/}
-          {/*     style={{left: progress}}*/}
-          {/*/>*/}
-          {/*      ==============================    */}
-
-        </div>
-
-        <div className={styles.progress__filled}
-             style={{flexBasis: progress}}
+        <div className={ styles.progress__clickReader }/>
+        <div
+            className={ styles.progress__filled }
+             style={{ flexBasis: progress }}
         />
-
-        <div className={styles.progress__marker}
-             style={{left: progress}}
+        <div
+            className={ styles.progress__marker }
+            style={{ left: progress }}
         />
-
     </div>
-
   );
-};
-
-ProgressBar.propTypes = {
-
-};
-
-export default ProgressBar;
+}

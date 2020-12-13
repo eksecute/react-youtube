@@ -1,193 +1,29 @@
+@import "../../normalise.css";
 
-
-//    NORMALISE
-// ===========================
-*, ::before, ::after {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-// ===========================
-
-
-
-//    VARIABLES
-// ===========================
-$phase-one: #87CEFA;
-$phase-two: #ffff00;
-$phase-three: #ffdab9;
-
-$event-one: #993535;
-$event-two: #993535;
-$event-three: #349924;
-
-$text-dark: #000000;
-$text-bright: #efefef;
-// ===========================
-
-
-
-//  STYLES
-// ===========================
-.container {
-  display: flex;
-  flex-direction: column;
-  background-color: rgba(193, 193, 193, .2);
-}
 .player {
-  //background-color: rgba(121, 123, 19, .1);
+  position: relative;
+  padding: 0;
+  margin: 1rem 0 0 0;
 
-  &Wrapper {
-    padding: 1rem 1rem 0;
+  &__video {
+    border: solid 5px;
+    object-fit: fill;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    right: 1px;
+    cursor: pointer;
 
-    &Video {
-      border: solid 5px;
-      //border-radius: 1%;
-      object-fit: fill;
-      max-width: 100%;
-      margin: 0;
-      padding: 0;
-      right: 1px;
+    &_paused {
+      transition: .0s;
+      filter: brightness(50%);
     }
   }
-  &Controls {
-    //background-color: yellowgreen;
-    height: 50px;
-    border-left: solid 5px ;
-    border-bottom: solid 5px ;
-    border-right: solid 5px ;
 
-    margin-left: 1rem;
-    margin-right: 1rem;
-    margin-top: 0;
-
-    //background: rgba(92, 92, 0, 0.29);
-
-      flex: 10;
-      position: relative;
-      display: flex;
-      flex-basis: 100%;
-      height: 100%;
-      //height: 5px;
-      transition: height 0.3s;
-      background: rgba(0,0,0,0.5);
-      cursor: pointer;
-
-      &__Filled {
-        width: 0;
-        background: rgba(155,198,0,.3);
-        flex: 0;
-      }
-      &__Marker {
-        position: absolute;
-        left: -1px;
-        height: 100%;
-        width: 10px;
-        border: 3px solid;
-        background: #ffc600;
-        cursor: ew-resize;
-      }
-      &__phsAndEvs {
-
-        //&_phase1 {
-          position: absolute;
-          height: 100%;
-          //background: $phase-one;
-          opacity: .8;
-          //cursor: help;
-          width: 40px;
-          //&:hover {
-          //
-          //}
-        //}
-        //
-        //&_phase2 {
-        //  position: absolute;
-        //  height: 100%;
-        //  background: $phase-two;
-        //  opacity: .8;
-        //  //cursor: help;
-        //  width: 90px;
-        //  &:hover {
-        //
-        //  }
-        //}
-        //
-        //&_phase3 {
-        //  position: absolute;
-        //  height: 100%;
-        //  background: $phase-three;
-        //  opacity: .8;
-        //  //cursor: help;
-        //  width: 140px;
-        //  &:hover {
-        //
-        //  }
-        //}
-    }
+  &__progress {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    left: 0;
   }
 }
-
-
-.navigation {
-  padding: 1rem;
-  height: 40px;
-  line-height: 40px;
-
-  &Events {
-    padding: 0 0 1rem;
-
-    &Item {
-      display: flex;
-      //margin-bottom: 5px;
-      vertical-align: center;
-      border: 2px solid;
-
-      &Btn {
-        height: 40px;
-        width: 140px;
-        border: none;
-        border-right: 2px solid;
-
-        &One {
-          color: $text-bright;
-          background: $event-one;
-        }
-        &Two {
-          color: $text-bright;
-          background: $event-two;
-        }
-        &Three {
-          color: $text-bright;
-          background: $event-three;
-        }
-      }
-    }
-  }
-  &Phases { //done
-
-    display: flex;
-    align-items: center;
-    padding-bottom: 1rem;
-
-    &Btn {
-      border: solid;
-      height: 45px;
-      width: 140px;
-
-      &One {
-        background: $phase-one;
-      }
-      &Two {
-        background: $phase-two;
-      }
-      &Three {
-        background: $phase-three;
-      }
-  }
-  }
-  &Description {
-
-  }
-}
-// ===========================
